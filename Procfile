@@ -1,1 +1,1 @@
-web: php -S 0.0.0.0:${PORT} -t api_mini_super_5crud
+web: apache2-foreground
