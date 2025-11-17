@@ -1,17 +1,27 @@
 <?php
-$host = getenv("DB_HOST");
-$user = getenv("DB_USER");
-$pass = getenv("DB_PASS");
-$db   = getenv("DB_NAME");
+header("Content-Type: application/json; charset=utf-8");
 
-$conn = new mysqli($host, $user, $pass, $db);
+$DB_HOST = getenv("DB_HOST");
+$DB_USER = getenv("DB_USER");
+$DB_PASS = getenv("DB_PASS");
+$DB_NAME = getenv("DB_NAME");
+$DB_PORT = getenv("DB_PORT");
 
-if ($conn->connect_error) {
-    die(json_encode([
+try {
+    $dsn = "mysql:host={$DB_HOST};dbname={$DB_NAME};charset=utf8;port={$DB_PORT}";
+    $pdo = new PDO($dsn, $DB_USER, $DB_PASS, [
+        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
+    ]);
+} catch (Exception $e) {
+    echo json_encode([
         "exito" => false,
-        "mensaje" => "Error en la conexión: " . $conn->connect_error
-    ]));
+        "mensaje" => "Error al conectar: " . $e->getMessage(),
+        "datos" => null
+    ]);
+    exit;
 }
 
-$conn->set_charset("utf8");
-?>
+function obtenerConexion() {
+    global $pdo;
+    return $pdo;
+}
