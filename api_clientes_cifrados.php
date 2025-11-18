@@ -26,8 +26,8 @@ function descifrarDatos($encrypted, $clave) {
 // Tabla de usuarios (simulada - en producción debe estar en BD)
 // Relaciona cédula con clave de encriptación
 $usuarios = [
-    "208540987" => "MiCl4v3S3gur4_2024", // Cambiar por tus datos reales
-    "123456789" => "OtraClaveSegura123"
+    "504590104" => "Jefry#123" // Cambiar por tus datos reales
+    
 ];
 
 try {
@@ -169,4 +169,5 @@ try {
     error_log($ex->getMessage());
     responder(false, "Error en el servidor: " . $ex->getMessage(), null, 500);
 }
+
 ?>
