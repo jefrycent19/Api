@@ -8,22 +8,17 @@ require_once "config.php";
  * Configura CORS para permitir que otros proyectos consuman el API.
  */
 function configurarCors() {
-    // Permitir orígenes dinámicos cuando sea necesario para soportar credenciales.
-    // Si la petición incluye Origin, lo devolvemos; si no, usamos '*'.
-    $origin = isset($_SERVER['HTTP_ORIGIN']) ? $_SERVER['HTTP_ORIGIN'] : '*';
-
-    // Nota: si se utiliza Access-Control-Allow-Credentials: true, no debe usarse '*'.
-    header("Access-Control-Allow-Origin: " . $origin);
-    header("Access-Control-Allow-Headers: Content-Type, Authorization, Accept");
-    header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
+    header("Access-Control-Allow-Origin: *");
     header("Access-Control-Allow-Credentials: true");
+    header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
+    header("Access-Control-Allow-Headers: Content-Type, X-Cedula-Programador, x-cedula-programador");
 
+    // Manejar OPTIONS (muy importante)
     if ($_SERVER["REQUEST_METHOD"] === "OPTIONS") {
         http_response_code(200);
-        exit;
+        exit();
     }
 }
-
 /**
  * Lee el cuerpo del request como JSON y lo devuelve como arreglo.
  */
