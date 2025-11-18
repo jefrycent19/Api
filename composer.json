@@ -1,7 +1,6 @@
 {
-  "name": "minisuper/api",
-  "description": "Mini Super API",
-  "require": {
-    "php": ">=8.0"
-  }
+    "require": {
+        "ext-pdo": "*",
+        "ext-pdo_mysql": "*"
+    }
 }
